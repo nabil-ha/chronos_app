@@ -8,11 +8,13 @@ class PersonalDebt {
   double totalAmount;
   DateTime dateStarted;
   int? durationMonths;
+  bool isAccepted;
   PersonalDebt({
     required this.dateStarted,
     this.durationMonths,
     required this.fromUser,
     required this.toUser,
     required this.totalAmount,
+    required this.isAccepted,
   });
 }

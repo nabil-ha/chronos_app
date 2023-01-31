@@ -58,12 +58,10 @@ class AppCubit extends Cubit<AppStates> {
     List<PersonalDebt> personalDebts = [
       PersonalDebt(
         dateStarted: DateTime.now(),
+        isAccepted: false,
         fromUser: getUser(),
         toUser: User(
-            id: 1,
-            username: "Hussain",
-            name: "AlHussain Alsaggaf",
-            totalIncome: 7500),
+            id: 1, username: "Hussain", name: "H.AlSaggaf", totalIncome: 7500),
         totalAmount: 1500,
       )
     ];
