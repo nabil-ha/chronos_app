@@ -2,25 +2,31 @@ import 'package:chronos/const.dart';
 import 'package:flutter/material.dart';
 
 class CurvedAppBar extends StatelessWidget {
-  String title;
-  CurvedAppBar({required this.title});
+  String? title;
+  bool? isBackButton;
+  double? height;
+  Widget? widget;
+  CurvedAppBar({this.title, this.isBackButton, this.height, this.widget});
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      alignment: Alignment.center,
+      height: height ?? 100,
+      alignment: (title != null) ? Alignment.center : null,
       width: double.infinity,
       decoration: BoxDecoration(
-        // color: Colors.green[400],
         gradient: gradientGreenColor,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.elliptical(MediaQuery.of(context).size.width, 50.0),
         ),
       ),
-      child: Text(
-        title,
-        style: titleStyle,
-      ),
+      child: (widget != null)
+          ? widget
+          : title != null
+              ? Text(
+                  title!,
+                  style: titleStyle,
+                )
+              : SizedBox(),
     );
   }
 }
