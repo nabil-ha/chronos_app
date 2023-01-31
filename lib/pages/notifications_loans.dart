@@ -1,26 +1,18 @@
 import 'package:chronos/const.dart';
 import 'package:flutter/material.dart';
 
-class NotificationsLoansTab extends StatefulWidget {
-  const NotificationsLoansTab({Key? key}) : super(key: key);
+class PersonalDebtsTab extends StatefulWidget {
+  const PersonalDebtsTab({Key? key}) : super(key: key);
 
   @override
-  State<NotificationsLoansTab> createState() => _NotificationsLoansTabState();
+  State<PersonalDebtsTab> createState() => _PersonalDebtsTabState();
 }
 
-class _NotificationsLoansTabState extends State<NotificationsLoansTab> {
+class _PersonalDebtsTabState extends State<PersonalDebtsTab> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: Text(
-            "Loans",
-            style: subTitleStyle,
-          ),
-        )
-      ],
+    return SingleChildScrollView(
+      child: ListView.builder(,itemBuilder: itemBuilder),
     );
   }
 }

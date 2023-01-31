@@ -3,8 +3,8 @@ import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/models/transaction.dart';
 import 'package:flutter/material.dart';
 
-class NotificationsExpensesTab extends StatelessWidget {
-  const NotificationsExpensesTab({Key? key}) : super(key: key);
+class ExpensesTab extends StatelessWidget {
+  const ExpensesTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

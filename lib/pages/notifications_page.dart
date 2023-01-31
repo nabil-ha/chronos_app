@@ -82,8 +82,8 @@ class TabSection extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: const TabBarView(
               children: [
-                NotificationsLoansTab(),
-                NotificationsExpensesTab(),
+                PersonalDebtsTab(),
+                ExpensesTab(),
               ],
             ),
           ),
