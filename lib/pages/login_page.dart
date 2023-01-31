@@ -13,29 +13,33 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     AppCubit appCubit = AppCubit.get(context);
     return Scaffold(
-      backgroundColor: appCubit.isDarkTheme ? Colors.grey[900] : Colors.white,
+      backgroundColor: appCubit.getBackgroundColor(),
       body: Column(
         children: [
           CurvedAppBar(
-            title: "Login",
-          ),
+              // title: "",
+              // height: 130,
+              ),
           Image.asset("assets/icons/logo.png"),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
             child: Column(
               children: [
-                getTextField(title: "Username"),
+                getTextField(title: "Username", icon: Icons.person_outline),
                 const SizedBox(
                   height: 10,
                 ),
-                getTextField(title: "Password", isHidden: true),
+                getTextField(
+                    title: "Password",
+                    isHidden: true,
+                    icon: Icons.lock_outline),
                 const SizedBox(
                   height: 20,
                 ),
               ],
             ),
           ),
-          getLoginButton(
+          loginButton(
               context: context,
               onPressed: () async {
                 // await loginUser("nabil", "NaPiL");
@@ -45,7 +49,7 @@ class LoginPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          getLoginButton(
+          loginButton(
             context: context,
             icon: Image.asset("assets/icons/nafath.ico"),
             onPressed: () async {

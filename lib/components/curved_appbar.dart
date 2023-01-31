@@ -24,9 +24,9 @@ class CurvedAppBar extends StatelessWidget {
           : title != null
               ? Text(
                   title!,
-                  style: titleStyle,
+                  style: titleStyleWhite,
                 )
-              : SizedBox(),
+              : const SizedBox(),
     );
   }
 }
