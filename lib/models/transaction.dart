@@ -21,8 +21,7 @@ class Transaction {
     return Transaction(
       bank: BankAccount(name: "Alrajhi Bank", iban: "78264387632478623"),
       name: data["name"],
-      category: Category(
-          name: data["name"], icon: const Icon(Icons.add_shopping_cart)),
+      category: Category(name: data["name"], icon: Icons.add_shopping_cart),
       amount: data["amount"],
       date: DateTime.parse(data["date"]),
     );

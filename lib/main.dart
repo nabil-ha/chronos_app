@@ -31,9 +31,6 @@ class Main extends StatelessWidget {
     return BlocProvider<AppCubit>(
       create: (context) => AppCubit(),
       child: MaterialApp(
-        theme: ThemeData(
-            // primaryColor: Colors.green[400],
-            ),
         debugShowCheckedModeBanner: false,
         initialRoute: '/login',
         routes: {

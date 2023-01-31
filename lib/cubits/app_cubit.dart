@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chronos/cubits/app_states.dart';
 import 'package:chronos/models/bank_account.dart';
 import 'package:chronos/models/category.dart';
+import 'package:chronos/models/personal_debt.dart';
 import 'package:chronos/models/transaction.dart';
 import 'package:chronos/models/user.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(BuildContext context) => BlocProvider.of(context);
   bool isDarkTheme = true;
   List<Category> demoCategories = [
-    Category(name: "Shopping", icon: const Icon(Icons.shopping_cart_outlined))
+    Category(name: "Shopping", icon: Icons.shopping_cart_outlined)
   ];
   List<BankAccount> demoBankAccounts = [
     BankAccount(name: "Alrajhi Bank", iban: "238974198723129387123222"),
@@ -24,6 +25,14 @@ class AppCubit extends Cubit<AppStates> {
       Transaction(
         bank: demoBankAccounts[0],
         name: "Nike Store",
+        category: demoCategories[0],
+        amount: 200,
+        date: DateTime.now(),
+      ),
+      Transaction(
+        bank: demoBankAccounts[0],
+        name:
+            "Your current STC Package is higher than your typical usage, try to switch to a lower package",
         category: demoCategories[0],
         amount: 200,
         date: DateTime.now(),
@@ -43,6 +52,22 @@ class AppCubit extends Cubit<AppStates> {
       total += transactions[i].amount;
     }
     return total;
+  }
+
+  List<PersonalDebt> getPersonalDebts() {
+    List<PersonalDebt> personalDebts = [
+      PersonalDebt(
+        dateStarted: DateTime.now(),
+        fromUser: getUser(),
+        toUser: User(
+            id: 1,
+            username: "Hussain",
+            name: "AlHussain Alsaggaf",
+            totalIncome: 7500),
+        totalAmount: 1500,
+      )
+    ];
+    return personalDebts;
   }
 
   User getUser() {

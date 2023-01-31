@@ -10,23 +10,44 @@ class CurvedAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ?? 100,
-      alignment: (title != null) ? Alignment.center : null,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: gradientGreenColor,
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.elliptical(MediaQuery.of(context).size.width, 50.0),
+        height: height ?? 100,
+        alignment: (title != null) ? Alignment.center : null,
+        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: gradientGreenColor,
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.elliptical(MediaQuery.of(context).size.width, 50.0),
+          ),
         ),
-      ),
-      child: (widget != null)
-          ? widget
-          : title != null
-              ? Text(
-                  title!,
-                  style: titleStyleWhite,
-                )
-              : const SizedBox(),
-    );
+        child: (isBackButton ?? false)
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: 50,
+                    height: 40,
+                    child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(
+                          Icons.arrow_back_outlined,
+                          size: 35,
+                          color: Colors.white,
+                        )),
+                  ),
+                  Text(
+                    title!,
+                    style: titleStyleWhite,
+                  ),
+                ],
+              )
+            : (widget != null)
+                ? widget!
+                : title != null
+                    ? Text(
+                        title!,
+                        style: titleStyleWhite,
+                      )
+                    : const SizedBox());
   }
 }

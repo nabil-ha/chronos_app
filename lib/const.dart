@@ -24,11 +24,11 @@ const TextStyle subTitleStyle =
     TextStyle(fontFamily: "Merriweather", fontSize: 18, color: Colors.white);
 const TextStyle subTitleStyleBlack =
     TextStyle(fontFamily: "Merriweather", fontSize: 18, color: Colors.black);
-Gradient gradientGreenColor = LinearGradient(
+const Gradient gradientGreenColor = LinearGradient(
   begin: Alignment.topRight,
   end: Alignment.bottomLeft,
   colors: [
-    Colors.green[800]!,
-    Colors.green[400]!,
+    Color.fromRGBO(27, 127, 73, 1),
+    Color.fromRGBO(14, 215, 168, 1),
   ],
 );
