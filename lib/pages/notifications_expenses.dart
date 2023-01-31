@@ -42,7 +42,7 @@ class ExpensesTab extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      transactions[i].amount.toStringAsFixed(2),
+                      "${transactions[i].amount.toStringAsFixed(2)} SAR",
                       style: subTitleStyle,
                     ),
                   ),
