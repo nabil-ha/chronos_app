@@ -79,7 +79,7 @@ class PieChart2State extends State {
               ),
               Indicator(
                 color: Colors.green,
-                text: 'Personal Loans',
+                text: 'Personal Debts',
                 isSquare: true,
               ),
               SizedBox(
