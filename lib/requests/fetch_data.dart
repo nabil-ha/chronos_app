@@ -1,3 +1,6 @@
+import 'package:chronos/cubits/app_cubit.dart';
+import 'package:chronos/models/bank_account.dart';
+import 'package:chronos/models/personal_debt.dart';
 import 'package:chronos/models/transaction.dart';
 import 'package:chronos/models/user.dart';
 import 'package:chronos/services/dio_client.dart';
@@ -23,4 +26,18 @@ Future<List<Transaction>?> fetchTransactions(BuildContext context) async {
       (res.data as List).map((e) => Transaction.fromJson(e)).toList();
   return transactions;
   // return res;
+}
+
+Future<List<PersonalDebt>> fetchPersonalDebts(BuildContext context) async {
+  var res = await DioHelper.dio.get('api/personal-debts');
+  List<PersonalDebt> personalDebts =
+      (res.data as List).map((e) => PersonalDebt.fromJson(e)).toList();
+  return personalDebts;
+}
+
+Future<List<BankAccount>> fetchBankAccounts(BuildContext context) async {
+  var res = await DioHelper.dio.get('api/bank-accounts');
+  List<BankAccount> bankAccounts =
+      (res.data as List).map((e) => BankAccount.fromJson(e)).toList();
+  return bankAccounts;
 }

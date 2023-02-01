@@ -8,13 +8,21 @@ class PersonalDebt {
   double totalAmount;
   DateTime dateStarted;
   int? durationMonths;
-  bool isAccepted;
+  bool? isAccepted;
   PersonalDebt({
     required this.dateStarted,
     this.durationMonths,
     required this.fromUser,
     required this.toUser,
     required this.totalAmount,
-    required this.isAccepted,
+    this.isAccepted,
   });
+  factory PersonalDebt.fromJson(Map data) {
+    return PersonalDebt(
+      dateStarted: DateTime.parse(data["dateStarted"]),
+      fromUser: User.fromJson(data["fromUser"]),
+      toUser: User.fromJson(data["toUser"]),
+      totalAmount: data["totalAmount"],
+    );
+  }
 }

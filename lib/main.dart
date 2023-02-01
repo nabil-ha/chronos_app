@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/pages/home_page.dart';
 import 'package:chronos/pages/login_page.dart';
-import 'package:chronos/pages/personal_debt_page.dart';
 import 'package:chronos/services/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +35,6 @@ class Main extends StatelessWidget {
         routes: {
           '/login': (context) => const LoginPage(),
           '/home': (context) => const HomePage(),
-          '/home/personal-dent': (context) => const PersonalDebtPage(),
         },
       ),
     );

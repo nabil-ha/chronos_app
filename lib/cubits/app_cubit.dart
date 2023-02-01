@@ -5,6 +5,7 @@ import 'package:chronos/models/category.dart';
 import 'package:chronos/models/personal_debt.dart';
 import 'package:chronos/models/transaction.dart';
 import 'package:chronos/models/user.dart';
+import 'package:chronos/requests/fetch_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,20 +55,21 @@ class AppCubit extends Cubit<AppStates> {
     return total;
   }
 
-  List<PersonalDebt> getPersonalDebts() {
-    List<PersonalDebt> personalDebts = [
-      PersonalDebt(
-        dateStarted: DateTime.now(),
-        isAccepted: false,
-        fromUser: getUser(),
-        toUser: User(
-            id: 1, username: "Hussain", name: "H.AlSaggaf", totalIncome: 7500),
-        totalAmount: 1500,
-      )
-    ];
+  Future<List<PersonalDebt>> getPersonalDebts(BuildContext context) async {
+    List<PersonalDebt> personalDebts = await fetchPersonalDebts(context);
+    // [
+    //   PersonalDebt(
+    //     dateStarted: DateTime.now(),
+    //     fromUser: getUser(),
+    //     toUser: User(
+    //         id: 1, username: "Hussain", name: "H.AlSaggaf", totalIncome: 7500),
+    //     totalAmount: 1500,
+    //   )
+    // ];
     return personalDebts;
   }
 
+  void updatePersonalLoan() {}
   User getUser() {
     return User(
       id: 1,

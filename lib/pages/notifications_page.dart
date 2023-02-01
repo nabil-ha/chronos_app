@@ -1,8 +1,8 @@
 import 'package:chronos/components/curved_appbar.dart';
 import 'package:chronos/const.dart';
 import 'package:chronos/cubits/app_cubit.dart';
-import 'package:chronos/pages/notifications_expenses.dart';
-import 'package:chronos/pages/notifications_loans.dart';
+import 'package:chronos/pages/expenses_tab.dart';
+import 'package:chronos/pages/personal_debts_tab.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -80,7 +80,7 @@ class TabSection extends StatelessWidget {
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height,
-            child: const TabBarView(
+            child: TabBarView(
               children: [
                 PersonalDebtsTab(),
                 ExpensesTab(),

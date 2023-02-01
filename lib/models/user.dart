@@ -12,4 +12,12 @@ class User {
     required this.totalIncome,
     this.avatar,
   });
+  factory User.fromJson(Map data) {
+    return User(
+      id: data["id"],
+      username: data["username"] ?? "",
+      name: data["name"] ?? "",
+      totalIncome: data["totalIncome"] ?? 10000,
+    );
+  }
 }

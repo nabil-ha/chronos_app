@@ -10,4 +10,7 @@ class BankAccount {
     required this.iban,
     this.icon,
   });
+  factory BankAccount.fromJson(Map data) {
+    return BankAccount(name: data["name"], iban: data["iban"]);
+  }
 }
