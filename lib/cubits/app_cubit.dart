@@ -49,7 +49,9 @@ class AppCubit extends Cubit<AppStates> {
   Color? getBackgroundColor() {
     return isDarkTheme ? Colors.grey[900] : Colors.white;
   }
-
+  Color? getCardBg() {
+    return isDarkTheme ? Colors.grey[850]: Colors.white;
+  }
   double getTotalExpenses() {
     double total = 0;
     List<Transaction> transactions = getTransactions();
