@@ -30,7 +30,15 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => AddExpensePage(),
+                  builder: (_) => AddExpensePage(
+                    transaction: Transaction(
+                      bank: appCubit.demoBankAccounts[0],
+                      name: "",
+                      category: appCubit.demoCategories[0],
+                      amount: 0,
+                      date: DateTime.now(),
+                    ),
+                  ),
                 ));
           },
           icon: const Icon(

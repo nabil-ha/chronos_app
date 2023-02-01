@@ -5,17 +5,17 @@ import 'package:chronos/const.dart';
 import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/models/category.dart';
 import 'package:chronos/models/transaction.dart';
+import 'package:chronos/pages/qr_scan.dart';
 import 'package:flutter/material.dart';
 
 class AddExpensePage extends StatefulWidget {
-  AddExpensePage({Key? key, this.transaction}) : super(key: key);
-  Transaction? transaction;
+  AddExpensePage({Key? key, required this.transaction}) : super(key: key);
+  Transaction transaction;
   @override
   State<AddExpensePage> createState() => _AddExpensePageState();
 }
 
 class _AddExpensePageState extends State<AddExpensePage> {
-  Category? selected;
   @override
   Widget build(BuildContext context) {
     AppCubit appCubit = AppCubit.get(context);
@@ -28,6 +28,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
           CurvedAppBar(
             title: "Add a Transaction",
             isBackButton: true,
+            height: 150,
           ),
           const SizedBox(
             height: 50,
@@ -37,20 +38,54 @@ class _AddExpensePageState extends State<AddExpensePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                getTextField(
-                    title: "Amount", icon: Icons.attach_money_outlined),
-                const SizedBox(
-                  height: 10,
+                IconButton(
+                  iconSize: 100,
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (_) {
+                        return QRScanPage();
+                      },
+                    ));
+                  },
+                  icon: const Icon(Icons.qr_code_scanner_outlined),
                 ),
+                const Text(
+                  "Scan an invoice QR Code",
+                  style: TextStyle(
+                      fontFamily: "Merriweather",
+                      fontSize: 15,
+                      color: Colors.white),
+                ),
+                const SizedBox(height: 10),
+                getTextField(
+                  title: "Amount",
+                  icon: Icons.attach_money_outlined,
+                  onChanged: (p0) {},
+                ),
+                const SizedBox(height: 10),
                 const Text(
                   "  Choose a Category",
                   style: subTitleStyle,
                 ),
                 buildCategoryChips(categories),
                 const SizedBox(height: 10),
-                getTextField(title: "Transaction Title"),
+                getTextField(
+                  title: "Transaction Title",
+                  onChanged: (p0) => widget.transaction.name,
+                ),
                 const SizedBox(height: 10),
-                getTextField(title: "Notes", icon: Icons.note_alt_outlined),
+                getTextField(
+                  title: "Notes",
+                  icon: Icons.note_alt_outlined,
+                  onChanged: (p0) {},
+                ),
+                const SizedBox(height: 10),
+                getTextField(
+                  title: "Date",
+                  onChanged: (p0) {},
+                  inputType: TextInputType.datetime,
+                ),
                 const SizedBox(height: 50),
                 SizedBox(
                   width: double.infinity,
@@ -78,13 +113,15 @@ class _AddExpensePageState extends State<AddExpensePage> {
               highlightColor: Colors.transparent,
               onTap: () {
                 setState(() {
-                  selected = e;
+                  widget.transaction.category = e;
                 });
               },
               child: Chip(
-                shape: StadiumBorder(side: BorderSide(color: Colors.teal)),
-                backgroundColor:
-                    (e == selected) ? Colors.teal[600] : Colors.grey[900],
+                shape:
+                    const StadiumBorder(side: BorderSide(color: Colors.teal)),
+                backgroundColor: (e == widget.transaction.category)
+                    ? Colors.teal[600]
+                    : Colors.grey[900],
                 elevation: 10,
                 label: Text(
                   e.name,

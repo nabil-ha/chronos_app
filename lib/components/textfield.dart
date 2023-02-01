@@ -2,7 +2,11 @@ import 'package:chronos/const.dart';
 import 'package:flutter/material.dart';
 
 TextField getTextField(
-    {required String title, bool? isHidden, IconData? icon}) {
+    {required String title,
+    bool? isHidden,
+    IconData? icon,
+    TextInputType? inputType,
+    required Function(String) onChanged}) {
   return TextField(
     obscureText: isHidden ?? false,
     style: const TextStyle(color: Colors.white),
@@ -20,6 +24,7 @@ TextField getTextField(
       hintText: title,
       fillColor: Colors.transparent,
     ),
-    onChanged: (value) {},
+    keyboardType: inputType,
+    onChanged: onChanged,
   );
 }

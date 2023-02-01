@@ -25,13 +25,18 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
             child: Column(
               children: [
-                getTextField(title: "Username", icon: Icons.person_outline),
+                getTextField(
+                  title: "Username",
+                  icon: Icons.person_outline,
+                  onChanged: (p0) {},
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 getTextField(
                     title: "Password",
                     isHidden: true,
+                    onChanged: (p0) {},
                     icon: Icons.lock_outline),
                 const SizedBox(
                   height: 20,
