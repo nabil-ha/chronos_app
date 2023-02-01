@@ -3,6 +3,7 @@ import 'package:chronos/components/curved_appbar.dart';
 import 'package:chronos/const.dart';
 import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/models/transaction.dart';
+import 'package:chronos/pages/add_transaction.dart';
 import 'package:chronos/pages/notifications_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,13 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         child: IconButton(
           color: Colors.black,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AddExpensePage(),
+                ));
+          },
           icon: const Icon(
             Icons.add_outlined,
             color: Colors.black,
@@ -89,6 +96,7 @@ class _HomePageState extends State<HomePage> {
                               flex: 2,
                               child: Text(
                                 transactions[i].name,
+                                overflow: TextOverflow.ellipsis,
                                 style: subTitleStyle,
                               ),
                             ),

@@ -14,7 +14,11 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(BuildContext context) => BlocProvider.of(context);
   bool isDarkTheme = true;
   List<Category> demoCategories = [
-    Category(name: "Shopping", icon: Icons.shopping_cart_outlined)
+    Category(name: "Shopping", icon: Icons.shopping_cart_outlined),
+    Category(name: "Car Repair", icon: Icons.car_repair_outlined),
+    Category(name: "Personal Debt", icon: Icons.person_outline),
+    Category(name: "Grocery", icon: Icons.local_grocery_store_outlined),
+    Category(name: "Food", icon: Icons.food_bank_outlined),
   ];
   List<BankAccount> demoBankAccounts = [
     BankAccount(name: "Alrajhi Bank", iban: "238974198723129387123222"),

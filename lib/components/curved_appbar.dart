@@ -12,7 +12,7 @@ class CurvedAppBar extends StatelessWidget {
     return Container(
         height: height ?? 100,
         alignment: (title != null) ? Alignment.center : null,
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 35, 0, 0),
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: gradientGreenColor,
