@@ -44,7 +44,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (_) {
-                        return QRScanPage();
+                        return const QRScanPage();
                       },
                     ));
                   },
