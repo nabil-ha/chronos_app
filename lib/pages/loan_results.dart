@@ -31,7 +31,7 @@ class LoanCalculationResults extends StatelessWidget {
             title: "Loan Calculation Results",
             isBackButton: true,
           ),
-          const SizedBox(height: 200),
+          const SizedBox(height: 150),
           SizedBox(
             height: 300,
             width: MediaQuery.of(context).size.width * .9,
