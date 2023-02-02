@@ -49,14 +49,44 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: [],
-      //   onTap: (value) {
-      //     setState(() {
-      //       appCubit.currentIndex = value;
-      //     });
-      //   },
-      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(Icons.home_outlined),
+          ),
+          BottomNavigationBarItem(
+            label: "Transactions",
+            icon: Icon(
+              Icons.align_vertical_bottom_sharp,
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "Loans",
+            icon: Icon(
+              Icons.local_atm_rounded,
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(
+              Icons.person_outline,
+            ),
+          ),
+        ],
+        currentIndex: appCubit.currentIndex,
+        backgroundColor:
+            appCubit.isDarkTheme ? Colors.grey[800] : Colors.blue[50],
+        iconSize: 35,
+        selectedItemColor: Colors.tealAccent,
+        unselectedItemColor: Colors.white,
+        onTap: (value) {
+          setState(() {
+            appCubit.currentIndex = value;
+          });
+        },
+      ),
       backgroundColor: appCubit.getBackgroundColor(),
       body: SingleChildScrollView(
         child: Column(
