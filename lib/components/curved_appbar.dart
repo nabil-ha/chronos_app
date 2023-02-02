@@ -10,7 +10,7 @@ class CurvedAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: height ?? 100,
+        height: height ?? 130,
         alignment: (title != null) ? Alignment.center : null,
         padding: const EdgeInsets.fromLTRB(0, 35, 0, 0),
         width: double.infinity,
@@ -22,7 +22,7 @@ class CurvedAppBar extends StatelessWidget {
         ),
         child: (isBackButton ?? false)
             ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
                     width: 50,
@@ -35,10 +35,12 @@ class CurvedAppBar extends StatelessWidget {
                           color: Colors.white,
                         )),
                   ),
-                  Text(
-                    title!,
-                    style: titleStyleWhite,
-                  ),
+                  title != null
+                      ? Text(
+                          title!,
+                          style: titleStyleWhite,
+                        )
+                      : const SizedBox(),
                 ],
               )
             : (widget != null)

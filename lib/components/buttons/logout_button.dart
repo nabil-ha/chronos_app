@@ -12,7 +12,9 @@ class LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-        onPressed: onPressed,
+        onPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
         style: OutlinedButton.styleFrom(
             elevation: (elevation != null) ? 10 : 0,
             backgroundColor: Colors.red,

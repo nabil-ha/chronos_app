@@ -4,6 +4,9 @@ import 'package:chronos/const.dart';
 import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/models/transaction.dart';
 import 'package:chronos/pages/add_transaction.dart';
+import 'package:chronos/pages/expenses_page.dart';
+import 'package:chronos/pages/expenses_tab.dart';
+import 'package:chronos/pages/loan_page.dart';
 import 'package:chronos/pages/notifications_page.dart';
 import 'package:chronos/pages/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +23,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     AppCubit appCubit = AppCubit.get(context);
     List<Transaction> transactions = appCubit.getTransactions();
+    List<Widget> pages = [
+      HomePageColumn(appCubit: appCubit, transactions: transactions),
+      const ExpensesPage(),
+      const LoanPage(),
+      ProfilePage(
+        user: appCubit.user,
+        useBack: false,
+      ),
+    ];
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: CircleAvatar(
@@ -57,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.home_outlined),
           ),
           BottomNavigationBarItem(
-            label: "Transactions",
+            label: "Expenses",
             icon: Icon(
               Icons.align_vertical_bottom_sharp,
             ),
@@ -88,82 +101,98 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       backgroundColor: appCubit.getBackgroundColor(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CurvedAppBar(
-              widget: WelcomeBar(appCubit: appCubit),
-              height: 300,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: TotalExpensesCard(appCubit: appCubit),
+      body: pages[appCubit.currentIndex],
+    );
+  }
+}
+
+class HomePageColumn extends StatelessWidget {
+  const HomePageColumn({
+    Key? key,
+    required this.appCubit,
+    required this.transactions,
+  }) : super(key: key);
+
+  final AppCubit appCubit;
+  final List<Transaction> transactions;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CurvedAppBar(
+            widget: WelcomeBar(appCubit: appCubit),
+            height: 300,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: TotalExpensesCard(appCubit: appCubit),
+              ),
+              const SizedBox(height: 20),
+              const Center(
+                child: PieChartCard(),
+              ),
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                child: Text(
+                  "Recent Transactions",
+                  style: subTitleStyle,
                 ),
-                const SizedBox(height: 20),
-                const Center(
-                  child: PieChartCard(),
-                ),
-                const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: Text(
-                    "Recent Transactions",
-                    style: subTitleStyle,
-                  ),
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
-                  itemCount: appCubit.getTransactions().length,
-                  itemBuilder: (context, i) {
-                    return SizedBox(
-                      height: 100,
-                      width: 400,
-                      child: Card(
-                        color: Colors.grey[900],
-                        elevation: 10,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(
-                                  transactions[i].category.icon ??
-                                      Icons.shopping_cart_outlined,
-                                  size: 35,
-                                  color: Colors.white,
-                                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+                itemCount: appCubit.getTransactions().length,
+                itemBuilder: (context, i) {
+                  return SizedBox(
+                    height: 100,
+                    width: 400,
+                    child: Card(
+                      color: Colors.grey[900],
+                      elevation: 10,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Icon(
+                                transactions[i].category.icon ??
+                                    Icons.shopping_cart_outlined,
+                                size: 35,
+                                color: Colors.white,
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                transactions[i].name,
-                                overflow: TextOverflow.ellipsis,
-                                style: subTitleStyle,
-                              ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              transactions[i].name,
+                              overflow: TextOverflow.ellipsis,
+                              style: subTitleStyle,
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                transactions[i].amount.toStringAsFixed(2),
-                                style: subTitleStyle,
-                              ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              transactions[i].amount.toStringAsFixed(2),
+                              style: subTitleStyle,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -202,22 +231,21 @@ class WelcomeBar extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ProfilePage(),
+                      builder: (context) => ProfilePage(
+                        user: appCubit.user,
+                        useBack: true,
+                      ),
                     ));
               },
               child: CircleAvatar(
                 radius: 35,
-                backgroundColor: Colors.transparent,
-                child: (appCubit.user.avatar != null)
+                backgroundImage: (appCubit.user.avatar != null)
                     ? Image.memory(
                         appCubit.user.avatar!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Icon(
-                        Icons.person_outline,
-                        size: 50,
-                        color: Colors.black,
-                      ),
+                        fit: BoxFit.fitWidth,
+                      ).image
+                    : null,
+                backgroundColor: Colors.teal,
               ),
             )),
         const Positioned(

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:chronos/components/messages_methods.dart';
 import 'package:chronos/components/progress_indicator.dart';
@@ -86,6 +88,11 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+  void updateUserAvatar(Uint8List? avatar) {
+    user.avatar = avatar;
+    emit(TriggerApp());
+  }
+
   Future<List<PersonalDebt>> getPersonalDebts(BuildContext context) async {
     List<PersonalDebt> personalDebts = await fetchPersonalDebts(context);
     // [
@@ -101,14 +108,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void updatePersonalLoan() {}
-  // User getUser() {
-  //   return User(
-  //     id: 1,
-  //     username: "nabil",
-  //     name: "Nabil",
-  //     totalIncome: 10000,
-  //   );
-  // }
 
   double getExpensesChangeRatio() {
     return 25;

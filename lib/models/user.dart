@@ -18,8 +18,17 @@ class User {
       id: data["id"],
       username: data["username"] ?? "",
       name: data["name"] ?? "",
-      avatar: (data['avatar'] != null) ? base64Decode(data['avatar']) : null,
+      avatar: data['avatar'],
       totalIncome: data["totalIncome"] ?? 10000,
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "username": username,
+      "name": name,
+      "totalIncome": totalIncome,
+      "avatar": avatar,
+    };
   }
 }

@@ -1,4 +1,5 @@
 import 'package:chronos/components/circular_progress_indicator.dart';
+import 'package:chronos/components/curved_appbar.dart';
 import 'package:chronos/const.dart';
 import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/models/transaction.dart';
@@ -6,12 +7,12 @@ import 'package:chronos/requests/fetch_data.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesTab extends StatelessWidget {
-  const ExpensesTab({Key? key}) : super(key: key);
-
+  ExpensesTab({Key? key, required this.usePadding}) : super(key: key);
+  bool usePadding;
   @override
   Widget build(BuildContext context) {
     AppCubit appCubit = AppCubit.get(context);
-    // List<Transaction> transactions = appCubit.getTransactions();
+
     return FutureBuilder(
         future: fetchTransactions(context),
         builder: (context, snapshot) {
@@ -20,7 +21,12 @@ class ExpensesTab extends StatelessWidget {
           } else {
             List<Transaction> transactions = snapshot.data as List<Transaction>;
             return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
+              padding: EdgeInsets.fromLTRB(
+                0,
+                0,
+                0,
+                usePadding ? 150 : 0,
+              ),
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: transactions.length,

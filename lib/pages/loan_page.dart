@@ -28,9 +28,9 @@ class LoanPage extends StatelessWidget {
       color: appCubit.getBackgroundColor(),
       child: Column(children: [
         CurvedAppBar(
-            // title: "",
-            // height: 130,
-            ),
+          title: "Loans",
+          // height: 130,
+        ),
         Container(
           margin: EdgeInsets.only(top: 20),
           width: 80,
@@ -111,7 +111,7 @@ class LoanPage extends StatelessWidget {
           // ignore: prefer_const_constructors
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 30),
+          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Row(
             children: [
               Text(

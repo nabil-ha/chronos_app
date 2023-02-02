@@ -14,12 +14,11 @@ Future<User?> loginUser(String username, String password) async {
       "password": password,
     });
     Map data = res.data;
-    data["image"] = (data['image'].isNotEmpty)
-        ? await getNetworkImageUint8List(data['image'])
+    data["avatar"] = (data['avatar'] != null)
+        ? await getNetworkImageUint8List(data['avatar'])
         : null;
     return User.fromJson(data);
-  } on Exception catch (e) {
-    print(e.toString());
+  } catch (e) {
     throw (e);
   }
 }

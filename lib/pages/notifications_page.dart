@@ -83,7 +83,9 @@ class TabSection extends StatelessWidget {
             child: TabBarView(
               children: [
                 PersonalDebtsTab(),
-                ExpensesTab(),
+                ExpensesTab(
+                  usePadding: true,
+                ),
               ],
             ),
           ),
