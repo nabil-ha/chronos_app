@@ -48,7 +48,7 @@ class LoanPage extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
-                    children: [
+                    children: const [
                       Text("Loan Amount: ", style: subTitleStyle),
                       SizedBox(
                         width: 30,
@@ -59,11 +59,11 @@ class LoanPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Text("Interest Rate: ", style: subTitleStyle),
                       SizedBox(
                         width: 30,
@@ -74,7 +74,7 @@ class LoanPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(

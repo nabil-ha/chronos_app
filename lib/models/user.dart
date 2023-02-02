@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 class User {
@@ -17,6 +18,7 @@ class User {
       id: data["id"],
       username: data["username"] ?? "",
       name: data["name"] ?? "",
+      avatar: (data['avatar'] != null) ? base64Decode(data['avatar']) : null,
       totalIncome: data["totalIncome"] ?? 10000,
     );
   }

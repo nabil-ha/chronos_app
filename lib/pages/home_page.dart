@@ -5,6 +5,7 @@ import 'package:chronos/cubits/app_cubit.dart';
 import 'package:chronos/models/transaction.dart';
 import 'package:chronos/pages/add_transaction.dart';
 import 'package:chronos/pages/notifications_page.dart';
+import 'package:chronos/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,6 +49,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [],
+      //   onTap: (value) {
+      //     setState(() {
+      //       appCubit.currentIndex = value;
+      //     });
+      //   },
+      // ),
       backgroundColor: appCubit.getBackgroundColor(),
       body: SingleChildScrollView(
         child: Column(
@@ -155,8 +164,34 @@ class WelcomeBar extends StatelessWidget {
           top: 70,
           left: 360,
         ),
+        Positioned(
+            left: 10,
+            top: 25,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfilePage(),
+                    ));
+              },
+              child: CircleAvatar(
+                radius: 35,
+                backgroundColor: Colors.transparent,
+                child: (appCubit.user.avatar != null)
+                    ? Image.memory(
+                        appCubit.user.avatar!,
+                        fit: BoxFit.cover,
+                      )
+                    : const Icon(
+                        Icons.person_outline,
+                        size: 50,
+                        color: Colors.black,
+                      ),
+              ),
+            )),
         const Positioned(
-          top: 80,
+          top: 100,
           left: 10,
           child: Text(
             "Welcome",
@@ -164,10 +199,10 @@ class WelcomeBar extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 110,
+          top: 130,
           left: 8,
           child: Text(
-            appCubit.getUser().name,
+            appCubit.user.name,
             style: titleStyleWhite,
           ),
         ),

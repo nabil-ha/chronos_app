@@ -37,6 +37,7 @@ class Main extends StatelessWidget {
           '/login': (context) => const LoginPage(),
           '/home': (context) => const HomePage(),
           '/loan': (context) => const LoanPage(),
+          '/login': (context) => const LoginPage(),
         },
       ),
     );

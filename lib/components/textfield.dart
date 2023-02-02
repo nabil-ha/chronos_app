@@ -5,11 +5,13 @@ TextField getTextField(
     {required String title,
     bool? isHidden,
     IconData? icon,
+    TextEditingController? controller,
     TextInputType? inputType,
     required Function(String) onChanged}) {
   return TextField(
     obscureText: isHidden ?? false,
     style: const TextStyle(color: Colors.white),
+    controller: controller,
     decoration: InputDecoration(
       suffixIcon: Icon(
         icon,
