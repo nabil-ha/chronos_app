@@ -71,24 +71,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         onPressed: () async {
                           Uint8List? image = await getImage();
                           appCubit.updateUserAvatar(image);
+                          String message = "";
                           showProgressIndicator(context);
-                          var res = await putUser(appCubit.user);
-                          if (res.statusCode == 201) {
-                            Navigator.pop(context);
-                            showSnackBar("Sucess", context);
-                          } else {
-                            Navigator.pop(context);
-                            showCupertinoDialog(
-                              context: context,
-                              builder: (context) => CupertinoAlertDialog(
-                                title: Text(
-                                  "res.data",
-                                  style: subTitleStyle,
-                                ),
-                              ),
-                            );
-                            showDialogMessage(res.data, context);
+                          try {
+                            var res = await putUser(appCubit.user);
+                            if (res.statusCode == 201) {
+                              message = "Sucess";
+                            } else {
+                              message = res.data;
+                            }
+                          } catch (e) {
+                            message = e.toString();
                           }
+                          Navigator.pop(context);
+                          showSnackBar(message, context);
                           setState(() {});
                         },
                         icon: const Icon(

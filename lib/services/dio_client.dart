@@ -7,7 +7,7 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         sendTimeout: 5 * 1000,
-        receiveTimeout: 5 * 1000,
+        receiveTimeout: 10 * 1000,
         connectTimeout: 4 * 1000,
         baseUrl: baseUrl,
         validateStatus: (status) {

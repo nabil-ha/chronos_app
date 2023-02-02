@@ -31,6 +31,7 @@ Future<MultipartFile> getMultipartFile(Uint8List image, String name) async {
 }
 
 Future<String> getFilePath(String fileName) async {
+  print(fileName);
   Directory appDocumentsDirectory =
       await getApplicationDocumentsDirectory(); // 1
   String appDocumentsPath = appDocumentsDirectory.path; // 2
