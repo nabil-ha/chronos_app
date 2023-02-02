@@ -1,4 +1,5 @@
 import 'package:chronos/const.dart';
+import 'package:chronos/pages/loan_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -31,14 +32,39 @@ class LoanPage extends StatelessWidget {
           title: "Loans",
           // height: 130,
         ),
-        Container(
-          margin: EdgeInsets.only(top: 20),
-          width: 80,
-          height: 80,
-          child: Image.asset('assets/icons/rajhi.png'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              width: 80,
+              height: 80,
+              child: Image.asset('assets/icons/rajhi.png'),
+            ),
+            Column(
+              children: [
+                IconButton(
+                    color: Colors.teal,
+                    iconSize: 100,
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const LoanCalculator();
+                        },
+                      ));
+                    },
+                    icon: const Icon(Icons.calculate_outlined)),
+                Text(
+                  "Loan Calculator",
+                  style: subTitleStyle,
+                )
+              ],
+            ),
+          ],
         ),
         Container(
-          margin: EdgeInsets.all(30),
+          margin: const EdgeInsets.all(30),
           child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
@@ -78,7 +104,7 @@ class LoanPage extends StatelessWidget {
                     height: 15,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Text("Left: ", style: subTitleStyle),
                       SizedBox(
                         width: 30,
