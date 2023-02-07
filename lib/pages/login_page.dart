@@ -19,58 +19,67 @@ class LoginPage extends StatelessWidget {
     AppCubit appCubit = AppCubit.get(context);
     return Scaffold(
       backgroundColor: appCubit.getBackgroundColor(),
-      body: Column(
-        children: [
-          CurvedAppBar(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CurvedAppBar(
+              title: "CHRONOS",
               // title: "",
               // height: 130,
-              ),
-          Image.asset("assets/icons/logo.png"),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-            child: Column(
-              children: [
-                getTextField(
-                  title: "Username",
-                  icon: Icons.person_outline,
-                  controller: usernameController,
-                  onChanged: (p0) {},
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                getTextField(
-                    title: "Password",
-                    isHidden: true,
-                    controller: passwordController,
-                    onChanged: (p0) {},
-                    icon: Icons.lock_outline),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
             ),
-          ),
-          loginButton(
-            context: context,
-            onPressed: () async {
-              await appCubit.getUser(
-                  context, usernameController.text, passwordController.text);
-            },
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          loginButton(
-            context: context,
-            icon: Image.asset("assets/icons/nafath.ico"),
-            onPressed: () async {
-              // await fetchTransactions(context);
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const HomePage()));
-            },
-          ),
-        ],
+            Image.asset("assets/icons/logo.png"),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+              child: Column(
+                children: [
+                  getTextField(
+                    title: "Username",
+                    icon: Icons.person_outline,
+                    controller: usernameController,
+                    onChanged: (p0) {},
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  getTextField(
+                      title: "Password",
+                      isHidden: true,
+                      controller: passwordController,
+                      onChanged: (p0) {},
+                      icon: Icons.lock_outline),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+            loginButton(
+              context: context,
+              onPressed: () async {
+                await appCubit.getUser(
+                    context, usernameController.text, passwordController.text);
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            loginButton(
+              context: context,
+              icon: Image.asset("assets/icons/nafath.ico"),
+              onPressed: () async {
+                // await fetchTransactions(context);
+                appCubit.user = User(
+                  id: 1,
+                  username: "Nabil",
+                  name: "Nabil",
+                  totalIncome: 10000,
+                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const HomePage()));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

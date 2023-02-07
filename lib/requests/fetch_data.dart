@@ -13,7 +13,9 @@ Future<User?> loginUser(String username, String password) async {
       "username": username,
       "password": password,
     });
+    print(res.data);
     Map data = res.data;
+    print(data);
     data["avatar"] = (data['avatar'] != null)
         ? await getNetworkImageUint8List(data['avatar'])
         : null;

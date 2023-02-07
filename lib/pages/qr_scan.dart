@@ -1,3 +1,9 @@
+import 'dart:async';
+
+import 'package:chronos/const.dart';
+import 'package:chronos/models/transaction.dart';
+import 'package:chronos/pages/add_transaction.dart';
+import 'package:chronos/services/decrypt_qr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -13,18 +19,48 @@ class _QRScanPageState extends State<QRScanPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? result;
+
   @override
   Widget build(BuildContext context) {
-    return QRView(key: qrKey, onQRViewCreated: _onQRViewCreated);
+    print("RESULTS $result");
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned(
+            left: size.width * .5,
+            height: size.height * .5,
+            child: Text(
+              (result != null)
+                  ? result!.code ?? ""
+                  : "Please scan an invoice QR code",
+              style: subTitleStyle,
+            ),
+          ),
+          QRView(key: qrKey, onQRViewCreated: _onQRViewCreated),
+        ],
+      ),
+    );
   }
 
+  StreamSubscription? streamSubscription;
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
-    });
+    streamSubscription = controller.scannedDataStream.listen(
+      (scanData) {
+        streamSubscription!.cancel();
+        Transaction? transaction = decryptQRJson(scanData.code ?? "");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddExpensePage(
+              transaction: transaction!,
+              isScanned: true,
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

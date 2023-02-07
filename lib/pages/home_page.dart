@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
                 context,
                 MaterialPageRoute(
                   builder: (_) => AddExpensePage(
+                    isScanned: false,
                     transaction: Transaction(
                       bank: appCubit.demoBankAccounts[0],
                       name: "",
@@ -221,7 +222,7 @@ class WelcomeBar extends StatelessWidget {
             iconSize: 45,
           ),
           top: 70,
-          left: 360,
+          left: 330,
         ),
         Positioned(
             left: 10,
@@ -287,7 +288,7 @@ class WelcomeBar extends StatelessWidget {
         ),
         const Positioned(
           top: 215,
-          left: 240,
+          left: 220,
           child: Text(
             "since last month",
             style: subTitleStyle,
