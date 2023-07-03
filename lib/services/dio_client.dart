@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 
 class DioHelper {
   static late Dio dio;
-  static const String baseUrl = "http://8.213.26.116:8000/";
-  static init([String token = "59ed72d4c5fabcadc23673b97ead26d92595c77c"]) {
+  static const String baseUrl = "CENSORED";
+  static init([String token = "CENSORED"]) {
     dio = Dio(
       BaseOptions(
         sendTimeout: 5 * 1000,
